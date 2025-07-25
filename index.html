@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İşitme Engelliler için Chatbot Projesi</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            min-height: 100vh;
+            background: #1a2233 url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Roboto', Arial, sans-serif;
+            color: #fff;
+            position: relative;
+        }
+        .bg-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(20,28,44,0.85);
+            z-index: 0;
+        }
+        .main-content {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .navbar {
+            background: #1a2233 !important;
+            box-shadow: 0 2px 12px rgba(20,28,44,0.12);
+            padding-top: 24px;
+            transition: background 0.3s;
+        }
+        .navbar-brand {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 900;
+            font-size: 2rem;
+            color: #fff !important;
+            letter-spacing: 2px;
+            margin-left: 100px;
+            display: flex;
+            align-items: center;
+        }
+        .navbar-brand span {
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-left: 8px;
+            letter-spacing: 1px;
+            color: #b0b8c9;
+        }
+        .navbar-nav .nav-link {
+            color: #fff !important;
+            font-size: 1.1rem;
+            margin-right: 18px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+        }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
+            color: #ff9800 !important;
+        }
+        .hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 120px 64px 0 64px;
+        }
+        .hero-title {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 900;
+            font-size: 2.7rem;
+            line-height: 1.2;
+            margin-bottom: 18px;
+            color: #fff;
+        }
+        .hero-title .highlight {
+            background: #ff9800;
+            color: #1a2233;
+            padding: 4px 12px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        .hero-subtitle {
+            color: #ff9800;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        .hero-desc {
+            color: #e0e6f0;
+            font-size: 1.08rem;
+            margin-bottom: 32px;
+            max-width: 600px;
+        }
+        .hero-btns {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 32px;
+        }
+        .btn-orange {
+            background: #ff9800;
+            color: #1a2233;
+            font-weight: 700;
+            border: none;
+            padding: 14px 36px;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            transition: background 0.2s, color 0.2s;
+        }
+        .btn-orange:hover {
+            background: #ffb74d;
+            color: #1a2233;
+        }
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+            font-weight: 700;
+            padding: 14px 36px;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            transition: background 0.2s, color 0.2s, border 0.2s;
+        }
+        .btn-outline:hover {
+            background: #fff;
+            color: #1a2233;
+            border: 2px solid #ff9800;
+        }
+        .footer-info {
+            color: #b0b8c9;
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 18px;
+            margin-top: 40px;
+        }
+        .contact-info-box {
+            background: linear-gradient(135deg, rgba(26,34,51,0.92) 70%, rgba(255,152,0,0.07) 100%);
+            border: 1.5px solid #232b3b;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(44,62,80,0.10);
+            padding: 32px 28px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .contact-info-box h4, .contact-info-box h5 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 700;
+        }
+        .contact-info-box h4 {
+            color: #ff9800;
+            font-size: 1.35rem;
+        }
+        .contact-info-box h5 {
+            color: #ff9800;
+            font-size: 1.1rem;
+        }
+        .contact-info-box a, .contact-info-box div {
+            color: #e0e6f0;
+            font-size: 1.05rem;
+        }
+        .contact-socials {
+            display: flex;
+            gap: 18px;
+            margin-top: 8px;
+        }
+        .contact-socials a {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #232b3b;
+            color: #fff;
+            font-size: 1.6rem;
+            box-shadow: 0 2px 8px rgba(44,62,80,0.10);
+            transition: background 0.2s, color 0.2s, transform 0.2s;
+        }
+        .contact-socials a:hover {
+            background: #ff9800;
+            color: #232b3b;
+            transform: scale(1.12);
+        }
+        .contact-form-box {
+            background: linear-gradient(135deg, rgba(26,34,51,0.92) 70%, rgba(255,152,0,0.07) 100%);
+            border: 1.5px solid #232b3b;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(44,62,80,0.10);
+            padding: 32px 28px;
+        }
+        .contact-map {
+            width: 100%;
+            height: 100%;
+            min-height: unset;
+            max-width: 100%;
+            border: 0;
+            display: block;
+        }
+        .contact-map-container {
+            width: 100%;
+            height: 200px;
+            min-height: 120px;
+            border: 2px solid #232b3b;
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        @media (max-width: 900px) {
+            .hero { padding-top: 40px; padding-left: 18px; padding-right: 18px; }
+            .hero-title { font-size: 2rem; }
+            .contact-info-box, .contact-form-box { padding: 18px 8px; }
+        }
+        @media (max-width: 600px) {
+            .hero { padding: 24px 4px 0 4px; }
+            .hero-title { font-size: 1.2rem; }
+            .hero-btns { flex-direction: column; gap: 10px; }
+            .contact-info-box, .contact-form-box { margin-bottom: 18px; }
+            .contact-map { height: 160px; max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-overlay"></div>
+    <div class="main-content">
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    SİNA 
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Menüyü Aç/Kapat">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link active" href="#">Anasayfa</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">Hakkımızda</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">İletişim</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <section class="hero d-flex flex-column justify-content-center">
+            <div class="hero-subtitle">Erişilebilir ve Akıllı Dijital Asistan</div>
+            <div class="hero-title">
+                <span class="highlight">İŞİTME ENGELLİLER İÇİN</span> YAPAY ZEKA DESTEKLİ CHATBOT
+            </div>
+            <div class="hero-desc">
+                İşitme engelli bireylerin hizmet sektöründe daha özgür ve bağımsız iletişim kurabilmesi için geliştirilen yapay zeka destekli chatbot robotumuz ile tanışın. Yazılı sohbet, anında yanıt ve kişiselleştirilebilir destek ile engelleri birlikte aşıyoruz.
+            </div>
+            <div class="hero-btns">
+                <a href="detaylar.html" class="btn btn-outline">DETAYLAR</a>
+            </div>
+            <div class="footer-info">
+                İşitme engelliler için erişilebilir teknolojilerde yeni bir çağ başlatıyoruz. Yapay zeka ile engelleri kaldırın!
+            </div>
+        </section>
+        <section id="about" class="about-section py-5" style="background:rgba(26,34,51,0.35);">
+            <div class="container">
+                <h2 class="text-center mb-5" style="font-family:'Montserrat',Arial,sans-serif;font-weight:900;color:#ff9800;letter-spacing:1px;">Hakkımızda</h2>
+                <div class="row justify-content-center mb-4 gap-4">
+                    <div class="col-md-5 col-lg-4 mb-4 d-flex align-items-center justify-content-center">
+                        <div class="d-flex align-items-center bg-dark bg-opacity-75 p-3 rounded-4 shadow-sm" style="min-width:320px;">
+                            <img src="#" alt="Kişi 1" style="width:72px;height:72px;object-fit:cover;border-radius:50%;border:4px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+                            <div class="ms-4">
+                                <h5 class="mb-1" style="font-family:'Montserrat',Arial,sans-serif;font-weight:700;">Kişi-1</h5>
+                                <div style="color:#ff9800;font-weight:600;">Görevi</div>
+                                <div style="color:#b0b8c9;font-size:0.98rem;">Projede adlığı görevi</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-lg-4 mb-4 d-flex align-items-center justify-content-center">
+                        <div class="d-flex align-items-center bg-dark bg-opacity-75 p-3 rounded-4 shadow-sm" style="min-width:320px;">
+                            <img src="#" alt="Kişi 2" style="width:72px;height:72px;object-fit:cover;border-radius:50%;border:4px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+                            <div class="ms-4">
+                                <h5 class="mb-1" style="font-family:'Montserrat',Arial,sans-serif;font-weight:700;">Kişi-2</h5>
+                                <div style="color:#ff9800;font-weight:600;">örevi</div>
+                                <div style="color:#b0b8c9;font-size:0.98rem;">Projede aldığı görev</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="bg-dark text-white p-4 rounded-4 shadow-sm" style="font-size:1.08rem;color:#e0e6f0;">
+                            <p>
+                                Projemiz, İşitme engelli bireylerin hizmet sektöründe daha etkin ve bağımsız bir şekilde iletişim kurabilmelerini sağlamak amacıyla geliştirilmiştir. Ekibimiz, yapay zeka ve erişilebilirlik alanındaki uzmanlığıyla, herkes için kapsayıcı ve yenilikçi çözümler üretmeyi hedeflemektedir.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="contact" class="contact-section py-5" style="background:rgba(26,34,51,0.25);">
+            <div class="container">
+                <h2 class="text-center mb-5" style="font-family:'Montserrat',Arial,sans-serif;font-weight:900;color:#ff9800;letter-spacing:1px;">İletişim</h2>
+                <div class="row justify-content-center align-items-stretch g-4">
+                    <div class="col-lg-5 d-flex flex-column justify-content-between mb-4 mb-lg-0">
+                        <div class="contact-info-box">
+                            <div>
+                                <h4 class="mb-3">Kurum Bilgileri</h4>
+                                <div class="mb-2"><strong>Adres:</strong> 1234 İşitme Botu Sk., İstanbul, Türkiye</div>
+                                <div class="mb-2"><strong>Telefon:</strong> <a href="tel:+902121234567">+90 212 123 45 67</a></div>
+                                <div class="mb-4"><strong>E-posta:</strong> <a href="mailto:info@isitmebotu.com">info@isitmebotu.com</a></div>
+                            </div>
+                            <div>
+                                <h5 class="mb-2">Sosyal Medya</h5>
+                                <div class="contact-socials mb-4">
+                                    <a href="#" target="_blank"><i class="bi bi-twitter"></i></a>
+                                    <a href="#" target="_blank"><i class="bi bi-instagram"></i></a>
+                                    <a href="#" target="_blank"><i class="bi bi-facebook"></i></a>
+                                </div>
+                                <div class="contact-map-container">
+                                    <iframe class="contact-map" title="Kurum Konumu" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d99689.88993901396!2d39.11575016630767!3d38.664764687085245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4076c06c76eaf697%3A0x12dab4118a3d2f39!2zRWzDonrEscSfLCBFbGF6xLHEnyBNZXJrZXovRWxhesSxxJ8!5e0!3m2!1str!2str!4v1753389517938!5m2!1str!2str" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <form class="contact-form-box text-white h-100">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Ad Soyad</label>
+                                <input type="text" class="form-control" id="name" placeholder="Adınızı ve soyadınızı girin" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">E-posta</label>
+                                <input type="email" class="form-control" id="email" placeholder="E-posta adresiniz" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Mesaj</label>
+                                <textarea class="form-control" id="message" rows="5" placeholder="Mesajınızı yazın" required></textarea>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-orange btn-lg">Gönder</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</body>
+</html> 
