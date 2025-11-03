@@ -42,7 +42,7 @@ body {
     text-decoration: none;
 }
 .social-icon:hover {
-    background: #dc3545;
+    background: #8B0000;
     color: #fff;
     transform: translateY(-2px);
 }
@@ -87,7 +87,7 @@ body {
     transition: color 0.2s;
 }
 .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
-    color: #dc3545 !important;
+    color: #8B0000 !important;
 }
 .hero {
     flex: 1;
@@ -109,14 +109,14 @@ body {
     color: #000;
 }
 .hero-title .highlight {
-    background: #dc3545;
+    background: #8B0000;
     color: #fff;
     padding: 4px 12px;
     border-radius: 4px;
     display: inline-block;
 }
 .hero-subtitle {
-    color: #dc3545;
+    color: #8B0000;
     font-size: 1.2rem;
     font-weight: 700;
     margin-bottom: 10px;
@@ -134,7 +134,7 @@ body {
     margin-bottom: 32px;
 }
 .btn-orange {
-    background: #dc3545;
+    background: #8B0000;
     color: #fff;
     font-weight: 700;
     border: none;
@@ -144,7 +144,7 @@ body {
     transition: background 0.2s, color 0.2s;
 }
 .btn-orange:hover {
-    background: #c82333;
+    background: #8B0000;
     color: #fff;
 }
 .btn-outline {
@@ -160,7 +160,7 @@ body {
 .btn-outline:hover {
     background: #000;
     color: #fff;
-    border: 2px solid #dc3545;
+    border: 2px solid #8B0000;
 }
 .footer-info {
     color: #333;
@@ -185,11 +185,11 @@ body {
     font-weight: 700;
 }
 .contact-info-box h4 {
-    color: #dc3545;
+    color: #8B0000;
     font-size: 1.35rem;
 }
 .contact-info-box h5 {
-    color: #dc3545;
+    color: #8B0000;
     font-size: 1.1rem;
 }
 .contact-info-box a, .contact-info-box div {
@@ -216,7 +216,7 @@ body {
     text-decoration: none;
 }
 .contact-socials a:hover {
-    background: #dc3545;
+    background: #8B0000;
     color: #fff !important;
     transform: scale(1.12);
 }
@@ -255,13 +255,13 @@ body {
 }
 .footer-section {
     background: rgba(255,255,255,0.95);
-    border-top: 2px solid #dc3545;
+    border-top: 2px solid #8B0000;
     padding: 60px 0 30px 0;
 }
 .footer-brand h3 {
     font-family: 'Montserrat', Arial, sans-serif;
     font-weight: 900;
-    color: #dc3545 !important;
+    color: #8B0000 !important;
     letter-spacing: 2px;
 }
 .footer-brand p {
@@ -278,11 +278,11 @@ body {
 .footer-section h5 {
     font-family: 'Montserrat', Arial, sans-serif;
     font-weight: 700;
-    color: #dc3545 !important;
+    color: #8B0000 !important;
 }
 .footer-links a:hover,
 .footer-contact a:hover {
-    color: #dc3545 !important;
+    color: #8B0000 !important;
 }
 .social-link {
     width: 44px;
@@ -299,7 +299,7 @@ body {
     text-decoration: none;
 }
 .social-link:hover {
-    background: #dc3545 !important;
+    background: #8B0000 !important;
     color: #fff !important;
     transform: translateY(-3px);
 }
