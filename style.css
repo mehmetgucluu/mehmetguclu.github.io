@@ -307,7 +307,7 @@ body {
     color: #fff !important;
 }
 @media (max-width: 900px) {
-    .hero { padding-top: 40px; padding-left: 18px; padding-right: 18px; }
+    .hero { margin-top:10px; padding-top: 40px; padding-left: 18px; padding-right: 18px; }
     .hero-title { font-size: 2rem; }
     .contact-info-box, .contact-form-box { padding: 18px 8px; }
 }
